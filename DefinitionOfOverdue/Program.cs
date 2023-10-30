@@ -35,13 +35,15 @@ namespace DefinitionOfOverdue
 
         public void Work()
         {
+            string separator = "___________";
+
             Console.WriteLine("Все консервы: ");
             ShowCannedFoods(_cannedFoods);
-            Console.WriteLine("_______________");
+            Console.WriteLine(separator);
 
             Console.WriteLine("Просроченные консервы: ");
             ShowCannedFoods(GetExpiredCanned(_cannedFoods));
-            Console.WriteLine("_______________");
+            Console.WriteLine(separator);
         }
 
         private void ShowCannedFoods(IEnumerable<CannedFood> cannedFoods)
@@ -56,7 +58,7 @@ namespace DefinitionOfOverdue
         }
 
         private IEnumerable<CannedFood> GetExpiredCanned(IEnumerable<CannedFood> cannedFoods) =>
-            cannedFoods.Where(cannedFood => cannedFood.YearOfProduction + cannedFood.ExpirationDate > DateTime.Now.Year);
+            cannedFoods.Where(cannedFood => cannedFood.YearOfProduction + cannedFood.ExpirationDate < DateTime.Now.Year);
     }
 
     class CannedFood
